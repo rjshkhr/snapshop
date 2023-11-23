@@ -15,7 +15,7 @@ import { cn } from '@/lib/utils'
 import { ArrowBigLeft, ShoppingCart } from 'lucide-react'
 import { eczar } from './fonts'
 import { useStore } from '@/contexts/store'
-import ProductCard from './product-card'
+import ProductCard from '@/components/product-card'
 import { Product } from '@/lib/types'
 import Image from 'next/image'
 
@@ -37,7 +37,7 @@ export default function Cart() {
       <SheetContent className='w-[350px] md:min-w-[715px] p-8 md:p-12 overflow-auto'>
         {cartLength > 0 ? (
           <>
-            <SheetHeader className='my-8'>
+            <SheetHeader className='my-12'>
               <SheetTitle
                 className={cn(
                   'text-2xl md:text-3xl font-medium flex gap-4',
@@ -47,7 +47,7 @@ export default function Cart() {
                 <ShoppingCart className='w-8 h-8 inline-flex fill-cyan-200 text-cyan-500' />
                 Your Shopping Cart
               </SheetTitle>
-              <SheetDescription className='text-sm font-medium text-slate-600 dark:text-slate-200 pt-2'>
+              <SheetDescription className='text-sm font-medium text-slate-600 dark:text-slate-200 pt-4'>
                 Your cart is where magic happens! Add your favorite items,
                 review your choices, and proceed to checkout.
               </SheetDescription>
@@ -61,7 +61,7 @@ export default function Cart() {
                 />
               ))}
             </div>
-            <SheetFooter className='pt-10'>
+            <SheetFooter className='pt-14'>
               <SheetClose asChild>
                 <Button type='submit' variant='default' size='lg'>
                   Checkout
@@ -81,13 +81,13 @@ export default function Cart() {
             />
             <h2
               className={cn(
-                'text-2xl md:text-3xl font-medium mt-12',
+                'text-2xl md:text-3xl font-medium mt-16',
                 eczar.className
               )}
             >
               No Items Found!
             </h2>
-            <p className='text-sm font-medium text-slate-600 dark:text-slate-200 mt-2 text-center'>
+            <p className='text-sm font-medium text-slate-600 dark:text-slate-200 mt-4 text-center'>
               Explore our amazing products and start filling it with items you
               love!
             </p>
@@ -96,7 +96,7 @@ export default function Cart() {
                 variant='default'
                 size='lg'
                 type='submit'
-                className='mt-8'
+                className='mt-16'
               >
                 <ArrowBigLeft className='mr-1 w-5 h-5' />
                 Go back

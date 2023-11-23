@@ -36,7 +36,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <StoreProvider>
             <Container>
               <Header />
-              <main className='pt-32 md:pt-40 pb-10'>{children}</main>
+              <main className='pt-28 md:pt-40 pb-10'>{children}</main>
             </Container>
             <Toaster />
           </StoreProvider>

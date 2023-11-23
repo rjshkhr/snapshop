@@ -48,7 +48,7 @@ export default function Home() {
         <TrendingUp className='w-8 h-8 text-cyan-500' />
         Exclusive Collections
       </h2>
-      <p className='text-sm font-medium mt-2 mb-10 text-slate-600 dark:text-slate-200 text-center md:text-left'>
+      <p className='text-sm font-medium mt-4 mb-12 text-slate-600 dark:text-slate-200 text-center md:text-left'>
         Enjoy unbeatable prices on your favorite items, but hurry — these
         special deals won&apos;t last forever!
       </p>
