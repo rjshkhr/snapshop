@@ -74,7 +74,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           <Bus className='h-8 w-8' />
           <h4 className='text-lg md:text-xl font-bold mt-2'>Free Shipping</h4>
           <p className='text-sm text-slate-600 dark:text-slate-200 mt-5 leading-6'>
-            We're delighted to offer you complimentary shipping on every order.
+            We&apos;re delighted to offer you complimentary shipping on every order.
             Enjoy the convenience of free delivery, making your shopping
             experience even better.
           </p>
