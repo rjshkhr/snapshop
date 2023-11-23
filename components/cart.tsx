@@ -31,7 +31,7 @@ export default function Cart() {
         <Button
           variant='default'
           size='lg'
-          className='bg-cyan-500 text-white flex gap-2 w-20 px-0'
+          className='bg-cyan-500 hover:bg-cyan-500/80 text-white flex gap-2 w-20 px-0'
         >
           <ShoppingCart className='h-[1.2rem] w-[1.2rem]' />
           {cartLength}
@@ -48,7 +48,7 @@ export default function Cart() {
             <ShoppingCart className='w-8 h-8 inline-flex fill-cyan-200 text-cyan-500' />
             Your Shopping Cart
           </SheetTitle>
-          <SheetDescription className='text-sm text-slate-600 dark:text-slate-200 pt-2'>
+          <SheetDescription className='text-sm font-medium text-slate-600 dark:text-slate-200 pt-2'>
             Your cart is where magic happens! Add your favorite items, review
             your choices, and proceed to checkout.
           </SheetDescription>

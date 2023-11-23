@@ -27,7 +27,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='en'>
       <body className={cn('antialiased', inter.className)}>
-        <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+        <ThemeProvider
+          disableTransitionOnChange
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+        >
           <StoreProvider>
             <Container>
               <Header />

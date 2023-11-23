@@ -11,13 +11,13 @@ export type Product = {
   }
 }
 
-export type ProductsInCart = {
+export type Cart = {
   [productId: number]: number
 }
 
 export type Store = {
   allProducts: Product[]
-  cart: ProductsInCart
+  cart: Cart
 }
 
 export type StoreAction =

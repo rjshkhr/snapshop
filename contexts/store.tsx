@@ -1,6 +1,6 @@
 'use client'
 
-import { ProductsInCart, Store, StoreAction } from '@/lib/types'
+import { Cart, Store, StoreAction } from '@/lib/types'
 import { Dispatch, createContext, useContext, useReducer } from 'react'
 
 const initialStore: Store = {
