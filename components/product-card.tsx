@@ -11,9 +11,13 @@ import { useRouter } from 'next/navigation'
 
 type ProductCardProps = {
   product: Product
+  imageHidden?: boolean
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({
+  product,
+  imageHidden
+}: ProductCardProps) {
   const { cart } = useStore()
   const dispatch = useStoreDispatch()
   const { toast } = useToast()
@@ -116,23 +120,25 @@ export default function ProductCard({ product }: ProductCardProps) {
   }
 
   return (
-    <section className='p-6 rounded-3xl w-72 h-[26.75rem] bg-accent hover:shadow-sm'>
-      <div className='h-44 flex relative items-center justify-center bg-white rounded-3xl'>
-        <Image
-          className='object-contain max-w-full max-h-full p-6 cursor-pointer'
-          src={product.image}
-          alt={product.description}
-          fill
-          priority
-          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-          onClick={() => router.push(`/products/${product.id}`)}
-        />
-      </div>
+    <section className='p-6 rounded-3xl w-72 bg-accent hover:shadow-sm'>
+      {!imageHidden && (
+        <div className='h-44 flex relative items-center justify-center bg-white rounded-3xl mb-6'>
+          <Image
+            className='object-contain max-w-full max-h-full p-6 cursor-pointer'
+            src={product.image}
+            alt={product.description}
+            fill
+            priority
+            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+            onClick={() => router.push(`/products/${product.id}`)}
+          />
+        </div>
+      )}
       <div
         className='flex flex-col cursor-pointer'
         onClick={() => router.push(`/products/${product.id}`)}
       >
-        <p className='text-lg font-medium mt-6 whitespace-nowrap overflow-hidden text-ellipsis'>
+        <p className='text-lg font-medium whitespace-nowrap overflow-hidden text-ellipsis'>
           {product.title}
         </p>
         <p className='text-sm font-medium text-slate-600 dark:text-slate-200 mt-1 capitalize'>

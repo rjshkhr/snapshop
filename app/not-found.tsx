@@ -3,6 +3,7 @@
 import { eczar } from '@/components/fonts'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { Home } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
@@ -17,6 +18,7 @@ export default function NotFound() {
         className='w-[186px]'
         width={512}
         height={512}
+        loading='eager'
       />
       <h2
         className={cn(
@@ -34,9 +36,10 @@ export default function NotFound() {
         variant='default'
         size='lg'
         className='mt-8'
-        onClick={() => router.back()}
+        onClick={() => router.push('/', { scroll: false })}
       >
-        Go Back
+        <Home className='mr-2 w-4 h-4' />
+        Go home
       </Button>
     </main>
   )

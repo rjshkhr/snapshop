@@ -12,7 +12,7 @@ import {
   SheetTrigger
 } from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
-import { ShoppingCart } from 'lucide-react'
+import { ArrowBigLeft, ShoppingCart } from 'lucide-react'
 import { eczar } from './fonts'
 import { useStore } from '@/contexts/store'
 import ProductCard from './product-card'
@@ -34,7 +34,7 @@ export default function Cart() {
           {cartLength}
         </Button>
       </SheetTrigger>
-      <SheetContent className='w-[350px] md:min-w-[720px] p-8 md:p-12 overflow-auto'>
+      <SheetContent className='w-[350px] md:min-w-[715px] p-8 md:p-12 overflow-auto'>
         {cartLength > 0 ? (
           <>
             <SheetHeader className='my-8'>
@@ -54,7 +54,11 @@ export default function Cart() {
             </SheetHeader>
             <div className='flex flex-col md:flex-row flex-wrap gap-6 items-center justify-between'>
               {productsInCart.map((proudct: Product) => (
-                <ProductCard key={proudct.id} product={proudct} />
+                <ProductCard
+                  key={proudct.id}
+                  product={proudct}
+                  imageHidden={true}
+                />
               ))}
             </div>
             <SheetFooter className='pt-10'>
@@ -73,6 +77,7 @@ export default function Cart() {
               alt='empty cart'
               width={512}
               height={512}
+              loading='eager'
             />
             <h2
               className={cn(
@@ -93,7 +98,8 @@ export default function Cart() {
                 type='submit'
                 className='mt-8'
               >
-                Go Back
+                <ArrowBigLeft className='mr-1 w-5 h-5' />
+                Go back
               </Button>
             </SheetClose>
           </section>
