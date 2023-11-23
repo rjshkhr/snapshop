@@ -17,6 +17,7 @@ import { eczar } from './fonts'
 import { useStore } from '@/contexts/store'
 import ProductCard from './product-card'
 import { Product } from '@/lib/types'
+import Image from 'next/image'
 
 export default function Cart() {
   const { cart, allProducts } = useStore()
@@ -28,45 +29,74 @@ export default function Cart() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button
-          variant='default'
-          size='lg'
-          className='bg-cyan-500 hover:bg-cyan-500/80 text-white flex gap-2 w-20 px-0'
-        >
+        <Button variant='success' size='lg' className='flex gap-2 w-20 px-0'>
           <ShoppingCart className='h-[1.2rem] w-[1.2rem]' />
           {cartLength}
         </Button>
       </SheetTrigger>
       <SheetContent className='w-[350px] md:min-w-[720px] p-8 md:p-12 overflow-auto'>
-        <SheetHeader className='my-8'>
-          <SheetTitle
-            className={cn(
-              'text-2xl md:text-3xl font-medium flex gap-4',
-              eczar.className
-            )}
-          >
-            <ShoppingCart className='w-8 h-8 inline-flex fill-cyan-200 text-cyan-500' />
-            Your Shopping Cart
-          </SheetTitle>
-          <SheetDescription className='text-sm font-medium text-slate-600 dark:text-slate-200 pt-2'>
-            Your cart is where magic happens! Add your favorite items, review
-            your choices, and proceed to checkout.
-          </SheetDescription>
-        </SheetHeader>
-        <div className='flex flex-col md:flex-row flex-wrap gap-6 items-center justify-between'>
-          {productsInCart.map((proudct: Product) => (
-            <ProductCard key={proudct.id} product={proudct} />
-          ))}
-        </div>
-        <SheetFooter className='pt-10'>
-          <SheetClose asChild>
-            {cartLength > 0 && (
-              <Button type='submit' variant='default' size='lg'>
-                Checkout
+        {cartLength > 0 ? (
+          <>
+            <SheetHeader className='my-8'>
+              <SheetTitle
+                className={cn(
+                  'text-2xl md:text-3xl font-medium flex gap-4',
+                  eczar.className
+                )}
+              >
+                <ShoppingCart className='w-8 h-8 inline-flex fill-cyan-200 text-cyan-500' />
+                Your Shopping Cart
+              </SheetTitle>
+              <SheetDescription className='text-sm font-medium text-slate-600 dark:text-slate-200 pt-2'>
+                Your cart is where magic happens! Add your favorite items,
+                review your choices, and proceed to checkout.
+              </SheetDescription>
+            </SheetHeader>
+            <div className='flex flex-col md:flex-row flex-wrap gap-6 items-center justify-between'>
+              {productsInCart.map((proudct: Product) => (
+                <ProductCard key={proudct.id} product={proudct} />
+              ))}
+            </div>
+            <SheetFooter className='pt-10'>
+              <SheetClose asChild>
+                <Button type='submit' variant='default' size='lg'>
+                  Checkout
+                </Button>
+              </SheetClose>
+            </SheetFooter>
+          </>
+        ) : (
+          <section className='flex flex-col justify-center items-center h-full'>
+            <Image
+              src='/empty-cart.png'
+              alt='empty cart'
+              width={186}
+              height={186}
+            />
+            <h2
+              className={cn(
+                'text-2xl md:text-3xl font-medium mt-12',
+                eczar.className
+              )}
+            >
+              No Items Found!
+            </h2>
+            <p className='text-sm font-medium text-slate-600 dark:text-slate-200 mt-2 text-center'>
+              Explore our amazing products and start filling it with items you
+              love!
+            </p>
+            <SheetClose asChild>
+              <Button
+                variant='success'
+                size='lg'
+                type='submit'
+                className='mt-8'
+              >
+                Go Back
               </Button>
-            )}
-          </SheetClose>
-        </SheetFooter>
+            </SheetClose>
+          </section>
+        )}
       </SheetContent>
     </Sheet>
   )

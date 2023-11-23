@@ -61,7 +61,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       return (
         <div className='flex justify-between items-center mt-6 gap-3'>
           <Button
-            className='text-2xl font-bold w-20 p-0'
+            className='text-2xl w-20 p-0'
             variant='destructive'
             size='lg'
             onClick={handleRemoveFromCart}
@@ -72,12 +72,12 @@ export default function ProductCard({ product }: ProductCardProps) {
             )}
             -
           </Button>
-          <p className='text-xl font-bold w-6 text-center'>
+          <p className='text-lg w-6 text-center font-medium'>
             {cart[product.id]}
           </p>
           <Button
-            className='text-2xl bg-green-500 text-white font-bold hover:bg-green-500/90 hover:text-white w-20 p-0'
-            variant='ghost'
+            className='text-2xl w-20 p-0'
+            variant='success'
             size='lg'
             disabled={cartUpdateStatus !== CartStatus.IDLE}
             onClick={handleAddToCart}
@@ -93,7 +93,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       return (
         <Button
           className='mt-6 w-full bg-background'
-          variant='ghost'
+          variant='secondary'
           size='lg'
           onClick={handleAddToCart}
           disabled={cartUpdateStatus !== CartStatus.IDLE}
@@ -110,13 +110,14 @@ export default function ProductCard({ product }: ProductCardProps) {
   }
 
   return (
-    <section className='p-6 rounded-3xl w-72 h-[26.75rem]  cursor-pointer bg-accent hover:bg-background'>
+    <section className='p-6 rounded-3xl w-72 h-[26.75rem]  cursor-pointer bg-accent'>
       <div className='h-44 flex relative items-center justify-center bg-white rounded-3xl'>
         <Image
           className='object-contain max-w-full max-h-full p-6'
           src={product.image}
           alt={product.description}
           fill
+          priority
           sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
         />
       </div>
