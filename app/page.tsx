@@ -17,13 +17,13 @@ export default function Home() {
 
   useEffect(() => {
     fetchProducts()
-  }, [fetchProducts])
 
-  async function fetchProducts() {
-    const products = await getAllProducts()
-    dispatch({ type: 'fetched_products', value: products })
-    setIsLoading(false)
-  }
+    async function fetchProducts() {
+      const products = await getAllProducts()
+      dispatch({ type: 'fetched_products', value: products })
+      setIsLoading(false)
+    }
+  }, [dispatch])
 
   function displayProducts() {
     if (isLoading) {

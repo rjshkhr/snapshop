@@ -5,8 +5,9 @@ import { Button } from '@/components/ui/button'
 import { useStore, useStoreDispatch } from '@/contexts/store'
 import { useToast } from './ui/use-toast'
 import { updateCart } from '@/lib/store-service'
-import { useState } from 'react'
+import { MouseEvent, useState } from 'react'
 import { CartStatus } from '@/lib/constants'
+import { useRouter } from 'next/navigation'
 
 type ProductCardProps = {
   product: Product
@@ -16,9 +17,12 @@ export default function ProductCard({ product }: ProductCardProps) {
   const { cart } = useStore()
   const dispatch = useStoreDispatch()
   const { toast } = useToast()
+  const router = useRouter()
   const [cartUpdateStatus, setCartUpdateStatus] = useState(CartStatus.IDLE)
 
-  async function handleAddToCart() {
+  async function handleAddToCart(e: MouseEvent<HTMLButtonElement>) {
+    e.stopPropagation()
+
     try {
       setCartUpdateStatus(CartStatus.ADDING)
       await updateCart(cart)
@@ -37,7 +41,9 @@ export default function ProductCard({ product }: ProductCardProps) {
     }
   }
 
-  async function handleRemoveFromCart() {
+  async function handleRemoveFromCart(e: MouseEvent<HTMLButtonElement>) {
+    e.stopPropagation()
+
     try {
       setCartUpdateStatus(CartStatus.REMOVING)
       await updateCart(cart)
@@ -110,23 +116,29 @@ export default function ProductCard({ product }: ProductCardProps) {
   }
 
   return (
-    <section className='p-6 rounded-3xl w-72 h-[26.75rem]  cursor-pointer bg-accent hover:shadow-sm'>
+    <section className='p-6 rounded-3xl w-72 h-[26.75rem] bg-accent hover:shadow-sm'>
       <div className='h-44 flex relative items-center justify-center bg-white rounded-3xl'>
         <Image
-          className='object-contain max-w-full max-h-full p-6'
+          className='object-contain max-w-full max-h-full p-6 cursor-pointer'
           src={product.image}
           alt={product.description}
           fill
           priority
           sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+          onClick={() => router.push(`/products/${product.id}`)}
         />
       </div>
-      <p className='text-lg font-medium mt-6 whitespace-nowrap overflow-hidden text-ellipsis'>
-        {product.title}
-      </p>
-      <p className='text-sm font-medium text-slate-600 dark:text-slate-200 mt-1 capitalize'>
-        {product.category}
-      </p>
+      <div
+        className='flex flex-col cursor-pointer'
+        onClick={() => router.push(`/products/${product.id}`)}
+      >
+        <p className='text-lg font-medium mt-6 whitespace-nowrap overflow-hidden text-ellipsis'>
+          {product.title}
+        </p>
+        <p className='text-sm font-medium text-slate-600 dark:text-slate-200 mt-1 capitalize'>
+          {product.category}
+        </p>
+      </div>
       <div className='flex justify-between items-center mt-8'>
         <p className='flex items-center'>
           <DollarSign className='h-4 w-4' />

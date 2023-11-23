@@ -12,6 +12,18 @@ export async function getAllProducts() {
   return res.json()
 }
 
+export async function getProductById(productId: number) {
+  const res = await fetch(`${BASE_URL}/products/${productId}`, {
+    cache: 'no-store'
+  })
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch product')
+  }
+
+  return res.json()
+}
+
 export async function updateCart(cart: Cart) {
   const products = []
 

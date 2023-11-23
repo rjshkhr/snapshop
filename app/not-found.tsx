@@ -27,8 +27,8 @@ export default function NotFound() {
         Oops! Page Not Found
       </h2>
       <p className='text-sm font-medium text-slate-600 dark:text-slate-200 mt-2 text-center'>
-        It seems like you've ventured into uncharted territory. The page you're
-        looking for might be lost in cyberspace.
+        It seems like you&apos;ve ventured into uncharted territory. The page
+        you&apos;re looking for might be lost in cyberspace.
       </p>
       <Button
         variant='default'
