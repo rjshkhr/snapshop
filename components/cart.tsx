@@ -72,6 +72,7 @@ export default function Cart() {
               alt='empty cart'
               width={186}
               height={186}
+              loading='eager'
             />
             <h2
               className={cn(
