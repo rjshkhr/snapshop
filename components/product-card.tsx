@@ -92,7 +92,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     } else {
       return (
         <Button
-          className='mt-6 w-full bg-background'
+          className='mt-6 w-full bg-background hover:bg-background/80'
           variant='secondary'
           size='lg'
           onClick={handleAddToCart}
@@ -110,7 +110,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   }
 
   return (
-    <section className='p-6 rounded-3xl w-72 h-[26.75rem]  cursor-pointer bg-accent'>
+    <section className='p-6 rounded-3xl w-72 h-[26.75rem]  cursor-pointer bg-accent hover:shadow-sm'>
       <div className='h-44 flex relative items-center justify-center bg-white rounded-3xl'>
         <Image
           className='object-contain max-w-full max-h-full p-6'

@@ -68,11 +68,11 @@ export default function Cart() {
         ) : (
           <section className='flex flex-col justify-center items-center h-full'>
             <Image
+              className='w-[186px]'
               src='/empty-cart.png'
               alt='empty cart'
-              width={186}
-              height={186}
-              loading='eager'
+              width={512}
+              height={512}
             />
             <h2
               className={cn(
@@ -88,7 +88,7 @@ export default function Cart() {
             </p>
             <SheetClose asChild>
               <Button
-                variant='success'
+                variant='default'
                 size='lg'
                 type='submit'
                 className='mt-8'
