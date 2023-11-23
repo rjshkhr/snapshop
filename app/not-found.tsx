@@ -11,7 +11,7 @@ export default function NotFound() {
   const router = useRouter()
 
   return (
-    <main className='flex items-center justify-center flex-col h-[calc(100vh-7rem)] md:h-[calc(100vh-10rem)] pb-28 md:pb-40'>
+    <section className='flex items-center justify-center flex-col min-h-[calc(100vh-8rem)] md:min-h-[calc(100vh-12.5rem)]'>
       <Image
         src='/error-404.png'
         alt='not found'
@@ -41,6 +41,6 @@ export default function NotFound() {
         <Home className='mr-2 w-4 h-4' />
         Go home
       </Button>
-    </main>
+    </section>
   )
 }

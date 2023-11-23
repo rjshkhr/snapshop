@@ -6,18 +6,20 @@ import Cart from '@/components/cart'
 
 export default function Header() {
   return (
-    <header className='h-28 md:h-40 flex justify-between items-center'>
-      <Link href='/'>
-        <h1 className={cn('text-4xl', norican.className)}>Snapshop</h1>
-      </Link>
-      <ul className='flex gap-2'>
-        <li>
-          <ThemeToggle />
-        </li>
-        <li>
-          <Cart />
-        </li>
-      </ul>
-    </header>
+    <div className='fixed inset backdrop-blur-2xl z-10 right-0 left-0 top-0'>
+      <header className='h-24 md:h-32 flex justify-between items-center max-w-screen-2xl w-[94%] mx-auto'>
+        <Link href='/'>
+          <h1 className={cn('text-4xl', norican.className)}>Snapshop</h1>
+        </Link>
+        <ul className='flex gap-2'>
+          <li>
+            <ThemeToggle />
+          </li>
+          <li>
+            <Cart />
+          </li>
+        </ul>
+      </header>
+    </div>
   )
 }

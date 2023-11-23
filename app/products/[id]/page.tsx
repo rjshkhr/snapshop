@@ -5,5 +5,5 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   console.log(product)
 
-  return <main className='my-4'>My Post: {product.title}</main>
+  return <section>My Post: {product.title}</section>
 }

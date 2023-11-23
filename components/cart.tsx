@@ -70,7 +70,7 @@ export default function Cart() {
             </SheetFooter>
           </>
         ) : (
-          <section className='flex flex-col justify-center items-center h-full'>
+          <section className='flex flex-col justify-center items-center min-h-full'>
             <Image
               className='w-[186px]'
               src='/empty-cart.png'

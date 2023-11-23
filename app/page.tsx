@@ -38,7 +38,7 @@ export default function Home() {
   }
 
   return (
-    <main className='my-4'>
+    <>
       <h2
         className={cn(
           'text-2xl md:text-3xl font-medium flex gap-4 items-center justify-center md:justify-start',
@@ -55,6 +55,6 @@ export default function Home() {
       <div className='flex flex-col md:flex-row flex-wrap gap-6 items-center justify-between'>
         {displayProducts()}
       </div>
-    </main>
+    </>
   )
 }
