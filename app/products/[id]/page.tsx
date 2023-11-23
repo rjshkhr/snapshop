@@ -6,7 +6,14 @@ import { Button } from '@/components/ui/button'
 import { getProductByCategory, getProductById } from '@/lib/store-service'
 import { Product } from '@/lib/types'
 import { cn } from '@/lib/utils'
-import { ArrowLeft, Bus, DollarSign, ShoppingBasket, Star } from 'lucide-react'
+import {
+  ArrowLeft,
+  Bus,
+  DollarSign,
+  ShoppingBasket,
+  ShoppingCart,
+  Star
+} from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Suspense } from 'react'
@@ -37,7 +44,10 @@ export default async function Page({ params }: { params: { id: string } }) {
         <div className='lg:flex items-start justify-center gap-24 xl:gap-16 xl:flex-col xl:basis-1/2'>
           <div className='flex flex-col items-start justify-start basis-1/2'>
             <h2 className='text-xl md:text-2xl font-medium'>{product.title}</h2>
-            <p className='flex items-center mt-6 font-bold'>
+            <p className='text-sm font-semibold text-slate-600 dark:text-slate-200 mt-3 capitalize'>
+              {product.category}
+            </p>
+            <p className='flex items-center font-bold mt-6'>
               <DollarSign className='h-5 w-5' />
               <span className='text-2xl md:text-3xl'>{product.price}</span>
             </p>
@@ -55,7 +65,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               Description
             </h3>
             <div className='h-[2px] w-full bg-gray-100 dark:bg-gray-800 mt-2' />
-            <p className='mt-6 text-sm text-slate-600 dark:text-slate-200 leading-6'>
+            <p className='mt-6 text-slate-600 dark:text-slate-200 leading-7'>
               {product.description}
             </p>
           </section>
@@ -64,6 +74,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               <CartButton productId={product.id} />
             </div>
             <Button variant='default' size='lg' className='basis-48'>
+              <ShoppingCart className='mr-2 w-5 h-5' />
               Buy now
             </Button>
           </section>
@@ -74,8 +85,8 @@ export default async function Page({ params }: { params: { id: string } }) {
           <Bus className='h-8 w-8' />
           <h4 className='text-lg md:text-xl font-bold mt-2'>Free Shipping</h4>
           <p className='text-sm text-slate-600 dark:text-slate-200 mt-5 leading-6'>
-            We&apos;re delighted to offer you complimentary shipping on every order.
-            Enjoy the convenience of free delivery, making your shopping
+            We&apos;re delighted to offer you complimentary shipping on every
+            order. Enjoy the convenience of free delivery, making your shopping
             experience even better.
           </p>
         </section>
@@ -93,14 +104,14 @@ export default async function Page({ params }: { params: { id: string } }) {
       <section className='flex mt-16 md:mt-32 flex-col'>
         <h2
           className={cn(
-            'text-2xl md:text-3xl font-medium flex items-start justify-center md:justify-start gap-3',
+            'text-2xl md:text-3xl font-medium flex items-start gap-3',
             eczar.className
           )}
         >
           <ShoppingBasket className='w-7 h-7 text-cyan-500' />
           Explore Similar Products
         </h2>
-        <p className='text-sm font-medium mt-4 mb-12 text-slate-600 dark:text-slate-200 text-center md:text-left'>
+        <p className='text-sm font-medium mt-4 mb-12 text-slate-600 dark:text-slate-200'>
           Find the perfect match for your preferences and needs.
         </p>
         <Suspense

@@ -67,7 +67,7 @@ export default function CartButton({ productId }: CartButtonProps) {
       <div className='w-full flex justify-between items-center gap-2'>
         <Button
           className='text-xl w-16 p-0'
-          variant='destructive'
+          variant='default'
           size='lg'
           onClick={handleRemoveFromCart}
           disabled={cartUpdateStatus !== CartStatus.IDLE}
@@ -78,10 +78,12 @@ export default function CartButton({ productId }: CartButtonProps) {
             '-'
           )}
         </Button>
-        <p className='text-lg text-center font-medium'>{cart[productId]}</p>
+        <p className='bg-background rounded-3xl w-16 h-11 text-lg flex justify-center items-center font-medium'>
+          {cart[productId]}
+        </p>
         <Button
           className='text-xl w-16 p-0'
-          variant='success'
+          variant='default'
           size='lg'
           disabled={cartUpdateStatus !== CartStatus.IDLE}
           onClick={handleAddToCart}
