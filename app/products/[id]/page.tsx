@@ -14,14 +14,14 @@ import {
   ShoppingCart,
   Star
 } from 'lucide-react'
-import { Metadata, ResolvedMetadata } from 'next'
+import { Metadata, ResolvingMetadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Suspense } from 'react'
 
 export async function generateMetadata(
   { params }: { params: { id: string } },
-  parent: ResolvedMetadata
+  parent: ResolvingMetadata
 ): Promise<Metadata> {
   const product: Product = await getProductById(Number(params.id))
 

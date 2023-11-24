@@ -17,18 +17,18 @@ export default function Home() {
 
   useEffect(() => {
     fetchProducts()
-  }, [dispatch])
 
-  async function fetchProducts() {
-    try {
-      const products = await getAllProducts()
-      dispatch({ type: 'fetched_products', value: products })
-    } catch (exception) {
-      console.error(exception)
-    } finally {
-      setIsLoading(false)
+    async function fetchProducts() {
+      try {
+        const products = await getAllProducts()
+        dispatch({ type: 'fetched_products', value: products })
+      } catch (exception) {
+        console.error(exception)
+      } finally {
+        setIsLoading(false)
+      }
     }
-  }
+  }, [dispatch])
 
   function displayProducts() {
     if (isLoading) {
