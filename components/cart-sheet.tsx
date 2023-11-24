@@ -20,7 +20,7 @@ import { Product } from '@/lib/types'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function Cart() {
+export default function CartSheet() {
   const { cart, allProducts } = useStore()
 
   const cartLength = Object.keys(cart).length || 0

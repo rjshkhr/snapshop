@@ -50,9 +50,11 @@ export default function CartUpdateButton({ productId }: CartUpdateButtonProps) {
 
       dispatch({ type: 'removed_from_cart', value: productId })
 
-      toast({
-        title: 'Product removed from the cart'
-      })
+      if (cart[productId] === 1) {
+        toast({
+          title: 'Product removed from the cart'
+        })
+      }
     } catch (exception) {
       toast({
         variant: 'destructive',

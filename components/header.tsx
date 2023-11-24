@@ -2,7 +2,7 @@ import { ThemeToggle } from '@/components/theme-toggle'
 import { norican } from '@/components/fonts'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
-import Cart from '@/components/cart'
+import CartSheet from '@/components/cart-sheet'
 
 export default function Header() {
   return (
@@ -16,7 +16,7 @@ export default function Header() {
             <ThemeToggle />
           </li>
           <li>
-            <Cart />
+            <CartSheet />
           </li>
         </ul>
       </header>
