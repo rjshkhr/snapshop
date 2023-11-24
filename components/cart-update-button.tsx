@@ -3,17 +3,10 @@
 import { useStore, useStoreDispatch } from '@/contexts/store'
 import { Button } from '@/components/ui/button'
 import { CartStatus } from '@/lib/constants'
-import {
-  ListPlus,
-  Loader2,
-  PackagePlus,
-  PlusSquare,
-  Trash2
-} from 'lucide-react'
-import { MouseEvent, useRef, useState } from 'react'
+import { ListPlus, Loader2, PackagePlus, Trash2 } from 'lucide-react'
+import { useState } from 'react'
 import { updateCart } from '@/lib/store-service'
 import { useToast } from '@/components/ui/use-toast'
-import { Input } from './ui/input'
 
 type CartUpdateButtonProps = {
   productId: number
@@ -24,12 +17,16 @@ export default function CartUpdateButton({ productId }: CartUpdateButtonProps) {
   const dispatch = useStoreDispatch()
   const { toast } = useToast()
   const [cartUpdateStatus, setCartUpdateStatus] = useState(CartStatus.IDLE)
-  const inputRef = useRef(null)
 
   async function handleAddToCart() {
     try {
       setCartUpdateStatus(CartStatus.ADDING)
       await updateCart(cart)
+
+      dispatch({
+        type: 'added_to_cart',
+        value: productId
+      })
 
       if (!(productId in cart)) {
         toast({
@@ -82,21 +79,9 @@ export default function CartUpdateButton({ productId }: CartUpdateButtonProps) {
             <Trash2 className='h-4 w-4' />
           )}
         </Button>
-        <Input
-          type='number'
-          ref={inputRef}
-          min={1}
-          max={99}
-          onChange={e => {
-            dispatch({
-              type: 'added_to_cart',
-              value: productId,
-              items: Number(e.target.value)
-            })
-          }}
-          value={cart[productId]}
-          className='w-16 h-11 rounded-3xl'
-        />
+        <p className='w-16 h-11 rounded-3xl bg-background flex justify-center items-center border border-input'>
+          {cart[productId]}
+        </p>
         <Button
           className='text-xl w-14 p-0'
           variant='default'
@@ -119,14 +104,7 @@ export default function CartUpdateButton({ productId }: CartUpdateButtonProps) {
         className='w-full bg-background hover:bg-background/80 shadow-none'
         variant='secondary'
         size='lg'
-        onClick={() => {
-          dispatch({
-            type: 'added_to_cart',
-            value: productId,
-            items: 1
-          })
-          handleAddToCart()
-        }}
+        onClick={handleAddToCart}
         disabled={cartUpdateStatus !== CartStatus.IDLE}
       >
         {cartUpdateStatus === CartStatus.ADDING ? (

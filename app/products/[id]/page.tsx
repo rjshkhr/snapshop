@@ -1,7 +1,6 @@
 import CartUpdateButton from '@/components/cart-update-button'
 import { eczar } from '@/components/fonts'
 import ProductCard from '@/components/product-card'
-import ProductCardSkeleton from '@/components/product-card-skeleton'
 import { Button } from '@/components/ui/button'
 import { getProductByCategory, getProductById } from '@/lib/store-service'
 import { Product } from '@/lib/types'
@@ -17,10 +16,15 @@ import {
 import { Metadata, ResolvingMetadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Suspense } from 'react'
+
+type Props = {
+  params: {
+    id: string
+  }
+}
 
 export async function generateMetadata(
-  { params }: { params: { id: string } },
+  { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const product: Product = await getProductById(Number(params.id))
@@ -30,7 +34,7 @@ export async function generateMetadata(
   }
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Product({ params }: Props) {
   const product: Product = await getProductById(Number(params.id))
   const categoryProducts: Product[] = await getProductByCategory(
     product.category
@@ -85,10 +89,12 @@ export default async function Page({ params }: { params: { id: string } }) {
             <div className='basis-48'>
               <CartUpdateButton productId={product.id} />
             </div>
-            <Button variant='default' size='lg' className='basis-48'>
-              <ShoppingCart className='mr-2 w-5 h-5' />
-              Buy now
-            </Button>
+            <Link href='/cart'>
+              <Button variant='default' size='lg' className='basis-48'>
+                <ShoppingCart className='mr-2 w-4 h-4' />
+                Buy now
+              </Button>
+            </Link>
           </section>
         </div>
       </section>
@@ -126,21 +132,11 @@ export default async function Page({ params }: { params: { id: string } }) {
         <p className='text-sm font-medium mt-4 mb-12 text-slate-600 dark:text-slate-200'>
           Find the perfect match for your preferences and needs.
         </p>
-        <Suspense
-          fallback={
-            <div className='flex flex-col md:flex-row flex-wrap gap-6 items-center justify-between'>
-              {new Array(5).fill(null).map((item, index) => (
-                <ProductCardSkeleton key={index} />
-              ))}
-            </div>
-          }
-        >
-          <div className='flex flex-col md:flex-row flex-wrap gap-6 items-center justify-between'>
-            {categoryProducts.map((proudct: Product) => (
-              <ProductCard key={proudct.id} product={proudct} />
-            ))}
-          </div>
-        </Suspense>
+        <div className='flex flex-col md:flex-row flex-wrap gap-6 items-center justify-between'>
+          {categoryProducts.map((proudct: Product) => (
+            <ProductCard key={proudct.id} product={proudct} />
+          ))}
+        </div>
       </section>
     </section>
   )

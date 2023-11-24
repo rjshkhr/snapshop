@@ -22,5 +22,5 @@ export type Store = {
 
 export type StoreAction =
   | { type: 'fetched_products'; value: Store['allProducts'] }
-  | { type: 'added_to_cart'; value: number, items: number }
+  | { type: 'added_to_cart'; value: number }
   | { type: 'removed_from_cart'; value: number }

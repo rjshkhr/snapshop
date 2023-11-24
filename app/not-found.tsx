@@ -1,15 +1,11 @@
-'use client'
-
 import { eczar } from '@/components/fonts'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { Home } from 'lucide-react'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 export default function NotFound() {
-  const router = useRouter()
-
   return (
     <section className='flex items-center justify-center flex-col min-h-[calc(100vh-10rem)] md:min-h-[calc(100vh-12.5rem)]'>
       <Image
@@ -32,15 +28,12 @@ export default function NotFound() {
         It seems like you&apos;ve ventured into uncharted territory. The page
         you&apos;re looking for might be lost in cyberspace.
       </p>
-      <Button
-        variant='default'
-        size='lg'
-        className='mt-16'
-        onClick={() => router.push('/', { scroll: false })}
-      >
-        <Home className='mr-2 w-4 h-4' />
-        Go home
-      </Button>
+      <Link href='/'>
+        <Button variant='default' size='lg' className='mt-16'>
+          <Home className='mr-2 w-4 h-4' />
+          Go home
+        </Button>
+      </Link>
     </section>
   )
 }

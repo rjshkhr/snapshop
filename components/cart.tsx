@@ -13,17 +13,17 @@ import {
 } from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
 import { ArrowBigLeft, ShoppingCart } from 'lucide-react'
-import { eczar } from './fonts'
+import { eczar } from '@/components/fonts'
 import { useStore } from '@/contexts/store'
 import ProductCard from '@/components/product-card'
 import { Product } from '@/lib/types'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Cart() {
   const { cart, allProducts } = useStore()
 
   const cartLength = Object.keys(cart).length || 0
-
   const productsInCart = allProducts.filter(p => p.id in cart)
 
   return (
@@ -63,9 +63,12 @@ export default function Cart() {
             </div>
             <SheetFooter className='pt-14'>
               <SheetClose asChild>
-                <Button type='submit' variant='default' size='lg'>
-                  Checkout
-                </Button>
+                <Link href='/cart'>
+                  <Button type='submit' variant='default' size='lg'>
+                    <ShoppingCart className='mr-2 h-4 w-4' />
+                    Proceed to Checkout
+                  </Button>
+                </Link>
               </SheetClose>
             </SheetFooter>
           </>

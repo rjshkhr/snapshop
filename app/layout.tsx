@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
 import { StoreProvider } from '@/contexts/store'
 import { inter } from '@/components/fonts'
