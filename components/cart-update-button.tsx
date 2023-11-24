@@ -1,12 +1,12 @@
 'use client'
 
 import { useStore, useStoreDispatch } from '@/contexts/store'
-import { Button } from '@/components/ui/button'
+import { Button } from './ui/button'
 import { CartStatus } from '@/lib/constants'
 import { ListPlus, Loader2, PackagePlus, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 import { updateCart } from '@/lib/store-service'
-import { useToast } from '@/components/ui/use-toast'
+import { useToast } from './ui/use-toast'
 
 type CartUpdateButtonProps = {
   productId: number

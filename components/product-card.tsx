@@ -4,8 +4,8 @@ import { Product } from '@/lib/types'
 import { DollarSign, Star } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import CartUpdateButton from '@/components/cart-update-button'
-import { SheetClose } from '@/components/ui/sheet'
+import CartUpdateButton from './cart-update-button'
+import { SheetClose } from './ui/sheet'
 
 type ProductCardProps = {
   product: Product

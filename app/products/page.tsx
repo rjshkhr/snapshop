@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
 
-export default function Products() {
+export default function ProductsPage() {
   return redirect('/')
 }

@@ -72,6 +72,12 @@ function storeReducer(store: Store, action: StoreAction) {
         cart: nextCart
       }
     }
+    case 'order_placed': {
+      return {
+        ...store,
+        cart: {}
+      }
+    }
     default: {
       throw Error('Unknown action')
     }

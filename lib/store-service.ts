@@ -22,8 +22,9 @@ export async function getProductById(productId: number) {
   return res.json()
 }
 
-export async function getProductByCategory(category: string) {
-  const res = await fetch(`${BASE_URL}/products/category/${category}`)
+export async function getProductsByCategory(url: string, category: string) {
+  await new Promise(resolve => setTimeout(resolve, 10000))
+  const res = await fetch(`${url}/${category}`)
 
   if (!res.ok) {
     throw new Error('Failed to fetch category products')

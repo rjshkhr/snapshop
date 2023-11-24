@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { useStore, useStoreDispatch } from '@/contexts/store'
+import { useEffect } from 'react'
+import { useStoreDispatch } from '@/contexts/store'
 import { BASE_URL, getAllProducts } from '@/lib/store-service'
 import { TrendingUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -11,8 +11,7 @@ import ProductCardSkeleton from '@/components/product-card-skeleton'
 import { Product } from '@/lib/types'
 import useSWR from 'swr'
 
-export default function Home() {
-  const { allProducts } = useStore()
+export default function HomePage() {
   const dispatch = useStoreDispatch()
   const { data, error, isLoading } = useSWR<Product[], Error>(
     `${BASE_URL}/products`,
@@ -21,7 +20,11 @@ export default function Home() {
 
   useEffect(() => {
     dispatch({ type: 'fetched_products', value: data || [] })
-  }, [data])
+  }, [data, dispatch])
+
+  if (error) {
+    console.error(error)
+  }
 
   function displayProducts() {
     if (isLoading) {
@@ -29,7 +32,7 @@ export default function Home() {
         .fill(null)
         .map((item, index) => <ProductCardSkeleton key={index} />)
     } else {
-      return allProducts.map((proudct: Product) => (
+      return data?.map((proudct: Product) => (
         <ProductCard key={proudct.id} product={proudct} />
       ))
     }

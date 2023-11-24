@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
+import { Button } from './ui/button'
 import {
   Sheet,
   SheetClose,
@@ -10,15 +10,14 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger
-} from '@/components/ui/sheet'
+} from './ui/sheet'
 import { cn } from '@/lib/utils'
-import { ArrowBigLeft, ShoppingCart } from 'lucide-react'
-import { eczar } from '@/components/fonts'
+import { ShoppingCart } from 'lucide-react'
+import { eczar } from './fonts'
 import { useStore } from '@/contexts/store'
-import ProductCard from '@/components/product-card'
-import { Product } from '@/lib/types'
-import Image from 'next/image'
+import ProductCard from './product-card'
 import Link from 'next/link'
+import EmptyCart from './empty-cart'
 
 export default function CartSheet() {
   const { cart, allProducts } = useStore()
@@ -53,7 +52,7 @@ export default function CartSheet() {
               </SheetDescription>
             </SheetHeader>
             <div className='flex flex-col md:flex-row flex-wrap gap-6 items-center justify-between'>
-              {productsInCart.map((proudct: Product) => (
+              {productsInCart.map(proudct => (
                 <ProductCard
                   key={proudct.id}
                   product={proudct}
@@ -78,39 +77,7 @@ export default function CartSheet() {
             </SheetFooter>
           </>
         ) : (
-          <section className='flex flex-col justify-center items-center min-h-full'>
-            <Image
-              className='w-[186px]'
-              src='/empty-cart.png'
-              alt='empty cart'
-              width={512}
-              height={512}
-              loading='eager'
-            />
-            <h2
-              className={cn(
-                'text-2xl md:text-3xl font-medium mt-16',
-                eczar.className
-              )}
-            >
-              No Items Found!
-            </h2>
-            <p className='text-sm font-medium text-slate-600 dark:text-slate-200 mt-4 text-center'>
-              Explore our amazing products and start filling it with items you
-              love!
-            </p>
-            <SheetClose asChild>
-              <Button
-                variant='default'
-                size='lg'
-                type='submit'
-                className='mt-16'
-              >
-                <ArrowBigLeft className='mr-1 w-5 h-5' />
-                Go back
-              </Button>
-            </SheetClose>
-          </section>
+          <EmptyCart inCartSheet={true} />
         )}
       </SheetContent>
     </Sheet>
