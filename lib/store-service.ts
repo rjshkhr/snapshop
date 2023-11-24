@@ -1,9 +1,9 @@
 import { Cart } from './types'
 
-const BASE_URL = 'https://fakestoreapi.com'
+export const BASE_URL = 'https://fakestoreapi.com'
 
-export async function getAllProducts() {
-  const res = await fetch(`${BASE_URL}/products`)
+export async function getAllProducts(url: string) {
+  const res = await fetch(url)
 
   if (!res.ok) {
     throw new Error('Failed to fetch products')

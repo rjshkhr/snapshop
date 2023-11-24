@@ -2,33 +2,26 @@
 
 import { useEffect, useState } from 'react'
 import { useStore, useStoreDispatch } from '@/contexts/store'
-import { getAllProducts } from '@/lib/store-service'
+import { BASE_URL, getAllProducts } from '@/lib/store-service'
 import { TrendingUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { eczar } from '@/components/fonts'
 import ProductCard from '@/components/product-card'
 import ProductCardSkeleton from '@/components/product-card-skeleton'
 import { Product } from '@/lib/types'
+import useSWR from 'swr'
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true)
   const { allProducts } = useStore()
   const dispatch = useStoreDispatch()
+  const { data, error, isLoading } = useSWR<Product[], Error>(
+    `${BASE_URL}/products`,
+    getAllProducts
+  )
 
   useEffect(() => {
-    fetchProducts()
-
-    async function fetchProducts() {
-      try {
-        const products = await getAllProducts()
-        dispatch({ type: 'fetched_products', value: products })
-      } catch (exception) {
-        console.error(exception)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-  }, [dispatch])
+    dispatch({ type: 'fetched_products', value: data || [] })
+  }, [data])
 
   function displayProducts() {
     if (isLoading) {

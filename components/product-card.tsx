@@ -5,33 +5,21 @@ import { DollarSign, Star } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import CartUpdateButton from '@/components/cart-update-button'
+import { SheetClose } from '@/components/ui/sheet'
 
 type ProductCardProps = {
   product: Product
-  imageHidden?: boolean
+  inCartSheet?: boolean
 }
 
 export default function ProductCard({
   product,
-  imageHidden
+  inCartSheet
 }: ProductCardProps) {
   const router = useRouter()
 
-  return (
-    <section className='p-6 rounded-3xl w-72 bg-accent hover:shadow-sm'>
-      {!imageHidden && (
-        <div className='h-44 flex relative items-center justify-center bg-white rounded-3xl mb-6'>
-          <Image
-            className='object-contain max-w-full max-h-full p-6 cursor-pointer'
-            src={product.image}
-            alt={product.title}
-            fill
-            priority
-            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-            onClick={() => router.push(`/products/${product.id}`)}
-          />
-        </div>
-      )}
+  function displayProductTitle() {
+    return (
       <div
         className='flex flex-col cursor-pointer'
         onClick={() => router.push(`/products/${product.id}`)}
@@ -43,6 +31,29 @@ export default function ProductCard({
           {product.category}
         </p>
       </div>
+    )
+  }
+
+  return (
+    <section className='p-6 rounded-3xl w-72 bg-accent hover:shadow-sm'>
+      {inCartSheet ? (
+        <SheetClose asChild>{displayProductTitle()}</SheetClose>
+      ) : (
+        <>
+          <div className='h-44 flex relative items-center justify-center bg-white rounded-3xl mb-6'>
+            <Image
+              className='object-contain max-w-full max-h-full p-6 cursor-pointer'
+              src={product.image}
+              alt={product.title}
+              fill
+              priority
+              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+              onClick={() => router.push(`/products/${product.id}`)}
+            />
+          </div>
+          {displayProductTitle()}
+        </>
+      )}
       <div className='flex justify-between items-center mt-8 mb-6'>
         <p className='flex items-center'>
           <DollarSign className='h-4 w-4' />

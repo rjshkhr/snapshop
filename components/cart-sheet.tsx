@@ -57,14 +57,19 @@ export default function CartSheet() {
                 <ProductCard
                   key={proudct.id}
                   product={proudct}
-                  imageHidden={true}
+                  inCartSheet={true}
                 />
               ))}
             </div>
             <SheetFooter className='pt-14'>
               <SheetClose asChild>
                 <Link href='/cart'>
-                  <Button type='submit' variant='default' size='lg'>
+                  <Button
+                    type='submit'
+                    variant='default'
+                    size='lg'
+                    className='w-full'
+                  >
                     <ShoppingCart className='mr-2 h-4 w-4' />
                     Proceed to Checkout
                   </Button>
