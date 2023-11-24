@@ -2,11 +2,11 @@ import { Cart } from './types'
 
 export const BASE_URL = 'https://fakestoreapi.com'
 
-export async function getAllProducts(url: string) {
+export async function fetcher(url: string) {
   const res = await fetch(url)
 
   if (!res.ok) {
-    throw new Error('Failed to fetch products')
+    throw new Error('Failed to fetch data')
   }
 
   return res.json()
@@ -17,17 +17,6 @@ export async function getProductById(productId: number) {
 
   if (!res.ok) {
     throw new Error('Failed to fetch product')
-  }
-
-  return res.json()
-}
-
-export async function getProductsByCategory(url: string, category: string) {
-  await new Promise(resolve => setTimeout(resolve, 10000))
-  const res = await fetch(`${url}/${category}`)
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch category products')
   }
 
   return res.json()

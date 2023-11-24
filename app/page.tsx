@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { useStoreDispatch } from '@/contexts/store'
-import { BASE_URL, getAllProducts } from '@/lib/store-service'
+import { BASE_URL, fetcher } from '@/lib/store-service'
 import { TrendingUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { eczar } from '@/components/fonts'
@@ -15,11 +15,11 @@ export default function HomePage() {
   const dispatch = useStoreDispatch()
   const { data, error, isLoading } = useSWR<Product[], Error>(
     `${BASE_URL}/products`,
-    getAllProducts
+    fetcher
   )
 
   useEffect(() => {
-    dispatch({ type: 'fetched_products', value: data || [] })
+    dispatch({ type: 'fetched_products', products: data || [] })
   }, [data, dispatch])
 
   if (error) {

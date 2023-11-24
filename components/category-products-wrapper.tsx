@@ -1,6 +1,6 @@
 'use client'
 
-import { BASE_URL, getProductsByCategory } from '@/lib/store-service'
+import { BASE_URL, fetcher } from '@/lib/store-service'
 import { Product } from '@/lib/types'
 import useSWR from 'swr'
 import ProductCard from './product-card'
@@ -14,8 +14,8 @@ export default function CategoryProductsWrapper({
   category
 }: CategoryProductsWrapperProps) {
   const { data, error, isLoading } = useSWR<Product[], Error>(
-    `${BASE_URL}/products/category`,
-    (url: string) => getProductsByCategory(url, category)
+    `${BASE_URL}/products/category/${category}`,
+    fetcher
   )
 
   if (error) {

@@ -25,7 +25,7 @@ export default function CartUpdateButton({ productId }: CartUpdateButtonProps) {
 
       dispatch({
         type: 'added_to_cart',
-        value: productId
+        productId
       })
 
       if (!(productId in cart)) {
@@ -48,7 +48,7 @@ export default function CartUpdateButton({ productId }: CartUpdateButtonProps) {
       setCartUpdateStatus(CartStatus.REMOVING)
       await updateCart(cart)
 
-      dispatch({ type: 'removed_from_cart', value: productId })
+      dispatch({ type: 'removed_from_cart', productId })
 
       if (cart[productId] === 1) {
         toast({

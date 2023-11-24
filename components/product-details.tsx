@@ -1,17 +1,32 @@
+'use client'
+
 import { Product } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { DollarSign, ShoppingCart, Star } from 'lucide-react'
 import Image from 'next/image'
 import { eczar } from './fonts'
 import { Button } from './ui/button'
-import Link from 'next/link'
 import CartUpdateButton from './cart-update-button'
+import { useStore, useStoreDispatch } from '@/contexts/store'
+import { useRouter } from 'next/navigation'
 
 type ProductDetailsProps = {
   product: Product
 }
 
 export default function ProductDetails({ product }: ProductDetailsProps) {
+  const { cart } = useStore()
+  const dispatch = useStoreDispatch()
+  const router = useRouter()
+
+  function handleBuyNow() {
+    if (!(product.id in cart)) {
+      dispatch({ type: 'added_to_cart', productId: product.id })
+    }
+
+    router.push('/cart')
+  }
+
   return (
     <section className='flex justify-center flex-col xl:flex-row gap-12 xl:gap-24 mt-8 md:mt-12'>
       <div className='h-96 flex relative w-[100%] items-center justify-center bg-white rounded-3xl xl:basis-1/2'>
@@ -56,12 +71,15 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
           <div className='basis-48'>
             <CartUpdateButton productId={product.id} />
           </div>
-          <Link href='/cart'>
-            <Button variant='default' size='lg' className='basis-48'>
-              <ShoppingCart className='mr-2 w-4 h-4' />
-              Buy now
-            </Button>
-          </Link>
+          <Button
+            variant='default'
+            size='lg'
+            className='basis-48'
+            onClick={handleBuyNow}
+          >
+            <ShoppingCart className='mr-2 w-4 h-4' />
+            Buy now
+          </Button>
         </section>
       </div>
     </section>

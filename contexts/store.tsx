@@ -41,16 +41,16 @@ function storeReducer(store: Store, action: StoreAction) {
     case 'fetched_products': {
       return {
         ...store,
-        allProducts: action.value
+        allProducts: action.products
       }
     }
     case 'added_to_cart': {
       let nextCart = { ...store.cart }
 
-      if (action.value in nextCart) {
-        nextCart[action.value] += 1
+      if (action.productId in nextCart) {
+        nextCart[action.productId] += 1
       } else {
-        nextCart[action.value] = 1
+        nextCart[action.productId] = 1
       }
 
       return {
@@ -61,10 +61,10 @@ function storeReducer(store: Store, action: StoreAction) {
     case 'removed_from_cart': {
       let nextCart = { ...store.cart }
 
-      if (action.value in nextCart && nextCart[action.value] !== 1) {
-        nextCart[action.value] -= 1
+      if (action.productId in nextCart && nextCart[action.productId] !== 1) {
+        nextCart[action.productId] -= 1
       } else {
-        delete nextCart[action.value]
+        delete nextCart[action.productId]
       }
 
       return {
