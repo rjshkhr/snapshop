@@ -47,25 +47,17 @@ function storeReducer(store: Store, action: StoreAction) {
     case 'added_to_cart': {
       let nextCart = { ...store.cart }
 
-      if (action.value in nextCart) {
-        nextCart[action.value] += 1
-      } else {
-        nextCart[action.value] = 1
-      }
-
       return {
         ...store,
-        cart: nextCart
+        cart: {
+          ...store.cart,
+          [action.value]: action.items
+        }
       }
     }
     case 'removed_from_cart': {
       let nextCart = { ...store.cart }
-
-      if (action.value in nextCart && nextCart[action.value] !== 1) {
-        nextCart[action.value] -= 1
-      } else {
-        delete nextCart[action.value]
-      }
+      delete nextCart[action.value]
 
       return {
         ...store,

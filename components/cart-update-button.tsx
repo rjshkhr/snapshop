@@ -3,28 +3,34 @@
 import { useStore, useStoreDispatch } from '@/contexts/store'
 import { Button } from '@/components/ui/button'
 import { CartStatus } from '@/lib/constants'
-import { ListPlus, Loader2 } from 'lucide-react'
-import { MouseEvent, useState } from 'react'
+import {
+  ListPlus,
+  Loader2,
+  PackagePlus,
+  PlusSquare,
+  Trash2
+} from 'lucide-react'
+import { MouseEvent, useRef, useState } from 'react'
 import { updateCart } from '@/lib/store-service'
 import { useToast } from '@/components/ui/use-toast'
+import { Input } from './ui/input'
 
-type CartButtonProps = {
+type CartUpdateButtonProps = {
   productId: number
 }
 
-export default function CartButton({ productId }: CartButtonProps) {
+export default function CartUpdateButton({ productId }: CartUpdateButtonProps) {
   const { cart } = useStore()
   const dispatch = useStoreDispatch()
   const { toast } = useToast()
   const [cartUpdateStatus, setCartUpdateStatus] = useState(CartStatus.IDLE)
+  const inputRef = useRef(null)
 
-  async function handleAddToCart(e: MouseEvent<HTMLButtonElement>) {
-    e.stopPropagation()
-
+  async function handleAddToCart() {
     try {
       setCartUpdateStatus(CartStatus.ADDING)
       await updateCart(cart)
-      dispatch({ type: 'added_to_cart', value: productId })
+
       if (!(productId in cart)) {
         toast({
           title: 'Product added to the cart'
@@ -40,18 +46,16 @@ export default function CartButton({ productId }: CartButtonProps) {
     }
   }
 
-  async function handleRemoveFromCart(e: MouseEvent<HTMLButtonElement>) {
-    e.stopPropagation()
-
+  async function handleRemoveFromCart() {
     try {
       setCartUpdateStatus(CartStatus.REMOVING)
       await updateCart(cart)
+
       dispatch({ type: 'removed_from_cart', value: productId })
-      if (cart[productId] === 1) {
-        toast({
-          title: 'Product removed from the cart'
-        })
-      }
+
+      toast({
+        title: 'Product removed from the cart'
+      })
     } catch (exception) {
       toast({
         variant: 'destructive',
@@ -64,9 +68,9 @@ export default function CartButton({ productId }: CartButtonProps) {
 
   if (productId in cart) {
     return (
-      <div className='w-full flex justify-between items-center gap-2'>
+      <div className='w-full flex justify-between items-center gap-1'>
         <Button
-          className='text-xl w-16 p-0'
+          className='text-xl w-14 p-0'
           variant='default'
           size='lg'
           onClick={handleRemoveFromCart}
@@ -75,23 +79,36 @@ export default function CartButton({ productId }: CartButtonProps) {
           {cartUpdateStatus === CartStatus.REMOVING ? (
             <Loader2 className='h-4 w-4 animate-spin' />
           ) : (
-            '-'
+            <Trash2 className='h-4 w-4' />
           )}
         </Button>
-        <p className='bg-background rounded-3xl w-16 h-11 text-lg flex justify-center items-center font-medium'>
-          {cart[productId]}
-        </p>
+        <Input
+          type='number'
+          ref={inputRef}
+          min={1}
+          max={99}
+          onChange={e => {
+            dispatch({
+              type: 'added_to_cart',
+              value: productId,
+              items: Number(e.target.value)
+            })
+          }}
+          value={cart[productId]}
+          className='w-16 h-11 rounded-3xl'
+        />
         <Button
-          className='text-xl w-16 p-0'
+          className='text-xl w-14 p-0'
           variant='default'
           size='lg'
+          type='submit'
           disabled={cartUpdateStatus !== CartStatus.IDLE}
           onClick={handleAddToCart}
         >
           {cartUpdateStatus === CartStatus.ADDING ? (
             <Loader2 className='h-4 w-4 animate-spin' />
           ) : (
-            '+'
+            <PackagePlus className='h-4 w-4' />
           )}
         </Button>
       </div>
@@ -102,7 +119,14 @@ export default function CartButton({ productId }: CartButtonProps) {
         className='w-full bg-background hover:bg-background/80 shadow-none'
         variant='secondary'
         size='lg'
-        onClick={handleAddToCart}
+        onClick={() => {
+          dispatch({
+            type: 'added_to_cart',
+            value: productId,
+            items: 1
+          })
+          handleAddToCart()
+        }}
         disabled={cartUpdateStatus !== CartStatus.IDLE}
       >
         {cartUpdateStatus === CartStatus.ADDING ? (

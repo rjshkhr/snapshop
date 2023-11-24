@@ -3,7 +3,7 @@ import { Cart } from './types'
 const BASE_URL = 'https://fakestoreapi.com'
 
 export async function getAllProducts() {
-  const res = await fetch(`${BASE_URL}/products`, { cache: 'no-store' })
+  const res = await fetch(`${BASE_URL}/products`)
 
   if (!res.ok) {
     throw new Error('Failed to fetch products')
@@ -13,9 +13,7 @@ export async function getAllProducts() {
 }
 
 export async function getProductById(productId: number) {
-  const res = await fetch(`${BASE_URL}/products/${productId}`, {
-    cache: 'no-store'
-  })
+  const res = await fetch(`${BASE_URL}/products/${productId}`)
 
   if (!res.ok) {
     throw new Error('Failed to fetch product')
@@ -25,9 +23,7 @@ export async function getProductById(productId: number) {
 }
 
 export async function getProductByCategory(category: string) {
-  const res = await fetch(`${BASE_URL}/products/category/${category}`, {
-    cache: 'no-store'
-  })
+  const res = await fetch(`${BASE_URL}/products/category/${category}`)
 
   if (!res.ok) {
     throw new Error('Failed to fetch category products')

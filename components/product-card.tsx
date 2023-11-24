@@ -4,7 +4,7 @@ import { Product } from '@/lib/types'
 import { DollarSign, Star } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import CartButton from '@/components/cart-button'
+import CartUpdateButton from '@/components/cart-update-button'
 
 type ProductCardProps = {
   product: Product
@@ -53,7 +53,7 @@ export default function ProductCard({
           <span className='font-semibold'>{product.rating.rate}</span>
         </p>
       </div>
-      <CartButton productId={product.id} />
+      <CartUpdateButton productId={product.id} />
     </section>
   )
 }

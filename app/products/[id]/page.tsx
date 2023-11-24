@@ -1,4 +1,4 @@
-import CartButton from '@/components/cart-button'
+import CartUpdateButton from '@/components/cart-update-button'
 import { eczar } from '@/components/fonts'
 import ProductCard from '@/components/product-card'
 import ProductCardSkeleton from '@/components/product-card-skeleton'
@@ -14,9 +14,21 @@ import {
   ShoppingCart,
   Star
 } from 'lucide-react'
+import { Metadata, ResolvedMetadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Suspense } from 'react'
+
+export async function generateMetadata(
+  { params }: { params: { id: string } },
+  parent: ResolvedMetadata
+): Promise<Metadata> {
+  const product: Product = await getProductById(Number(params.id))
+
+  return {
+    title: product.title
+  }
+}
 
 export default async function Page({ params }: { params: { id: string } }) {
   const product: Product = await getProductById(Number(params.id))
@@ -69,9 +81,9 @@ export default async function Page({ params }: { params: { id: string } }) {
               {product.description}
             </p>
           </section>
-          <section className='fixed xl:static bottom-0 flex justify-center xl:justify-start items-end w-[94%] xl:w-full mx-auto gap-6 py-3 bg-background z-10'>
+          <section className='fixed xl:static bottom-0 flex justify-center xl:justify-start items-end w-[94%] xl:w-full mx-auto gap-3 py-3 bg-background z-10'>
             <div className='basis-48'>
-              <CartButton productId={product.id} />
+              <CartUpdateButton productId={product.id} />
             </div>
             <Button variant='default' size='lg' className='basis-48'>
               <ShoppingCart className='mr-2 w-5 h-5' />
