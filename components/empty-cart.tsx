@@ -40,8 +40,8 @@ export default function EmptyCart({ inCartSheet }: EmptyCartProps) {
           </Button>
         </SheetClose>
       ) : (
-        <Link href='/'>
-          <Button variant='default' size='lg' type='submit' className='mt-16'>
+        <Link href='/' className='mt-16'>
+          <Button variant='default' size='lg' type='submit'>
             <Home className='mr-2 w-4 h-4' />
             Go home
           </Button>

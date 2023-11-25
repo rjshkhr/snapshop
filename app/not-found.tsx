@@ -28,8 +28,8 @@ export default function NotFound() {
         It seems like you&apos;ve ventured into uncharted territory. The page
         you&apos;re looking for might be lost in cyberspace.
       </p>
-      <Link href='/'>
-        <Button variant='default' size='lg' className='mt-16'>
+      <Link href='/' className='mt-16'>
+        <Button variant='default' size='lg'>
           <Home className='mr-2 w-4 h-4' />
           Go home
         </Button>

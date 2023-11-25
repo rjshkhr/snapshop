@@ -58,8 +58,7 @@ export default function CartPage() {
             Review Items in Your Cart
           </h2>
           <p className='text-sm font-medium text-slate-600 dark:text-slate-200 pt-4'>
-            Take a moment to review the items in your cart before proceeding to
-            checkout.
+            Take a moment to review the items in your cart before placing order.
           </p>
           <div className='flex flex-col md:flex-row flex-wrap gap-6 items-center justify-center lg:justify-start mt-12'>
             {productsInCart.map(proudct => (
