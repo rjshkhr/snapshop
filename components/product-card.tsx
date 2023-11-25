@@ -21,7 +21,7 @@ export default function ProductCard({
   function displayProductTitle() {
     return (
       <div
-        className='flex flex-col cursor-pointer'
+        className='flex flex-col cursor-pointer hover:text-cyan-500'
         onClick={() => router.push(`/products/${product.id}`)}
       >
         <p className='text-lg font-medium whitespace-nowrap overflow-hidden text-ellipsis'>

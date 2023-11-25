@@ -24,8 +24,8 @@ export default function CartPage() {
       .toFixed(2)
   )
 
-  const cartDiscount = Number(((8 / 100) * cartTotal).toFixed())
-  const tax = 2
+  const cartDiscount = Number(((12 / 100) * cartTotal).toFixed())
+  const tax = Number(((7 / 100) * cartTotal).toFixed())
   const orderTotal = Number((cartTotal + tax - cartDiscount).toFixed())
 
   function handlePlaceOrder() {

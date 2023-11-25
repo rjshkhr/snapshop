@@ -13,14 +13,10 @@ type CategoryProductsWrapperProps = {
 export default function CategoryProductsWrapper({
   category
 }: CategoryProductsWrapperProps) {
-  const { data, error, isLoading } = useSWR<Product[], Error>(
+  const { data, isLoading } = useSWR<Product[]>(
     `${BASE_URL}/products/category/${category}`,
     fetcher
   )
-
-  if (error) {
-    console.error(error)
-  }
 
   return (
     <div className='flex flex-col md:flex-row flex-wrap gap-6 items-center justify-between'>

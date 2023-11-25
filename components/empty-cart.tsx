@@ -1,20 +1,16 @@
-'use client'
-
 import { eczar } from './fonts'
 import { Button } from './ui/button'
 import { cn } from '@/lib/utils'
-import { ArrowBigLeft } from 'lucide-react'
+import { ArrowBigLeft, Home } from 'lucide-react'
 import Image from 'next/image'
 import { SheetClose } from './ui/sheet'
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 type EmptyCartProps = {
   inCartSheet?: boolean
 }
 
 export default function EmptyCart({ inCartSheet }: EmptyCartProps) {
-  const router = useRouter()
-
   return (
     <section className='flex flex-col justify-center items-center min-h-full'>
       <Image
@@ -44,16 +40,12 @@ export default function EmptyCart({ inCartSheet }: EmptyCartProps) {
           </Button>
         </SheetClose>
       ) : (
-        <Button
-          variant='default'
-          size='lg'
-          type='submit'
-          className='mt-16'
-          onClick={() => router.back()}
-        >
-          <ArrowBigLeft className='mr-1 w-5 h-5' />
-          Go back
-        </Button>
+        <Link href='/'>
+          <Button variant='default' size='lg' type='submit' className='mt-16'>
+            <Home className='mr-2 w-4 h-4' />
+            Go home
+          </Button>
+        </Link>
       )}
     </section>
   )

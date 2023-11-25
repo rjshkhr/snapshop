@@ -13,18 +13,11 @@ import useSWR from 'swr'
 
 export default function HomePage() {
   const dispatch = useStoreDispatch()
-  const { data, error, isLoading } = useSWR<Product[], Error>(
-    `${BASE_URL}/products`,
-    fetcher
-  )
+  const { data, isLoading } = useSWR<Product[]>(`${BASE_URL}/products`, fetcher)
 
   useEffect(() => {
     dispatch({ type: 'fetched_products', products: data || [] })
   }, [data, dispatch])
-
-  if (error) {
-    console.error(error)
-  }
 
   function displayProducts() {
     if (isLoading) {
