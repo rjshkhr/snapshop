@@ -26,7 +26,7 @@ Make sure you have Node.js (18 or higher) and npm installed on your machine.
 1. **Clone the repository:**
 
    ```bash
-   git@github.com:rajshekhar26/snapshop.git
+   git@github.com:rjshkhr/snapshop.git
    ```
 
 2. **Navigate to the project directory:**
